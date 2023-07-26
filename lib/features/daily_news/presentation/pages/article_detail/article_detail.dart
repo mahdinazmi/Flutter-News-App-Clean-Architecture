@@ -8,7 +8,7 @@ import '../../bloc/article/local/local_article_bloc.dart';
 import '../../bloc/article/local/local_article_event.dart';
 
 class ArticleDetailsView extends HookWidget {
-  final ArticleEntity ? article;
+  final ArticleEntity? article;
 
   const ArticleDetailsView({Key? key, this.article}) : super(key: key);
 
@@ -57,7 +57,10 @@ class ArticleDetailsView extends HookWidget {
           // Title
           Text(
             article!.title!,
-            style: const TextStyle(fontFamily: 'Butler', fontSize: 20, fontWeight: FontWeight.w900),
+            style: const TextStyle(
+                fontFamily: 'Butler',
+                fontSize: 20,
+                fontWeight: FontWeight.w900),
           ),
 
           const SizedBox(height: 14),
@@ -96,7 +99,7 @@ class ArticleDetailsView extends HookWidget {
     );
   }
 
-    Widget _buildFloatingActionButton() {
+  Widget _buildFloatingActionButton() {
     return Builder(
       builder: (context) => FloatingActionButton(
         onPressed: () => _onFloatingActionButtonPressed(context),
@@ -109,15 +112,13 @@ class ArticleDetailsView extends HookWidget {
     Navigator.pop(context);
   }
 
-  
   void _onFloatingActionButtonPressed(BuildContext context) {
-    BlocProvider.of < LocalArticleBloc > (context).add(SaveArticle(article!));
-    Scaffold.of(context).showSnackBar(
+    BlocProvider.of<LocalArticleBloc>(context).add(SaveArticle(article!));
+    ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         backgroundColor: Colors.black,
         content: Text('Article saved successfully.'),
       ),
     );
   }
-
 }
